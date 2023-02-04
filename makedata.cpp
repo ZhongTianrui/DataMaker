@@ -8,5 +8,6 @@ int main() {
 	/*make your data here
 	use cout in output
 	*/
+	cout << randd(1, 1e9) << " " << randd(1, 1e9);
 	return 0;
 }
