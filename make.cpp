@@ -64,7 +64,9 @@ int main() {
 		int numa, numb, cnt = 0;
 		string fname, exename;
 		finname >> fname;
-		ofstream off("config.yml");
+		string fnnn = fn + "\\config.yml";
+		ofstream off;
+		off.open(fn + "\\config.yml");
 		while (finnum >> numa) {
 			finnum >> numb;
 			finexe >> exename;
@@ -76,10 +78,10 @@ int main() {
 				freopen(s.c_str(), "r", stdin);
 				freopen(s2.c_str(), "w", stdout);
 				system("std.exe");
-				string fnnn = fn + "\\config.yml";
-				freopen(fnnn.c_str(), "w", stdout);
-				cout << i << ".in:\n";
-				cout << "  subtaskId: " << cnt << "\n";
+//				freopen(fnnn.c_str(), "w", stdout);
+//				off << "in"<< i << ".in:\n";
+//				off << "  subtaskId: " << cnt << "\n";
+//				off << "\n";
 			}
 			cnt ++;
 		}
