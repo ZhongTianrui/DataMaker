@@ -26,5 +26,3 @@
 
 储存库中的文件是一个 A+B Problem 的示例
 
-如果你想把数据组数调整，改动一下主程序中的 for 循环的次数就行：
-![image](https://user-images.githubusercontent.com/106294609/216769226-0abcb7c6-b433-41c4-9614-74c2d5b7a602.png)
