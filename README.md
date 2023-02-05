@@ -8,7 +8,7 @@
 3. 速度快
 
 用法：
-1. 打开 makedata.cpp，使用randd函数自定义随机数的范围，用cout进行输出。
+1. 打开 makedata.cpp，使用函数库自定义随机数，用cout进行输出。主程序的第一行必须是 `pre();`
 
 2. 打开 std.cpp，放上标程
 
@@ -26,3 +26,22 @@
 
 储存库中的文件是一个 A+B Problem 的示例
 
+程序库：
+
+randint() ：随机整型，支持 `long long`
+
+randch_up() ：随机大写字母
+
+randch_lo() ：随机小写字母
+
+randstr_h(int length) ：随机大小写字母和数字综合的字符串
+
+randstr_up(int length) ：随机大写字符串
+
+randstr_lo(int length) ：随机小写字符串
+
+randstr_num(int length) ：随机数字串
+
+
+
+目前正在更新
