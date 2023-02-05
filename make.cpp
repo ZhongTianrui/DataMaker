@@ -79,9 +79,9 @@ int main() {
 				freopen(s2.c_str(), "w", stdout);
 				system("std.exe");
 //				freopen(fnnn.c_str(), "w", stdout);
-//				off << "in"<< i << ".in:\n";
-//				off << "  subtaskId: " << cnt << "\n";
-//				off << "\n";
+				off << "in"<< i << ".in:\n";
+				off << "  subtaskId: " << cnt << "\n";
+				off << "\n";
 			}
 			cnt ++;
 		}
