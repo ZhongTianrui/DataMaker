@@ -4,7 +4,10 @@ using namespace std;
 using std::string;
 using std::random_device;
 using std::default_random_engine;
-
+struct js{
+	string Name;
+	int Num;
+};
 string strRand(int length) {			// length: 产生字符串的长度
     char tmp;							// tmp: 暂存一个随机数
     string buffer;						// buffer: 保存返回值
@@ -25,17 +28,53 @@ string strRand(int length) {			// length: 产生字符串的长度
     }
     return buffer;
 }
+//int ReadJsonNum() {
+//	Json::Reader reader;
+//	Json::Value root;
+//	ifstream fin("config.json", ios::binary);
+//	if (reader.parse(fin, root)) {
+////		J.Name = root["Name"].asString();
+//		return root["Number"].asInt();
+//	} else {
+//		return -1;
+//	}
+//	
+//}
+//string ReadJsonName() {
+//	Json::Reader reader;
+//	Json::Value root;
+//	ifstream fin("config.json", ios::binary);
+//	if (reader.parse(fin, root)) {
+//		return root["Name"].asString();
+//	} else {
+//		return "err";
+//	}
+//}
+/*
+This code have a problem,so we will not use it 
+*/
+
 int main() {
 	ios::sync_with_stdio(false);
-	string fn = strRand(10), sys = "mkdir " + fn;
-	system(sys.c_str());
 	ofstream fout("log.log");
+	ifstream ic("config\\Name.txt"), ici("config\\Number.txt");
+	string fn = strRand(10), sys = "mkdir " + fn;
+	string fnn;
+	ic >> fnn;
+	if (fnn != "random") {
+		fn = fnn;
+	}
+//	system("cd output");
+	sys = "mkdir " + fn;
+	system(sys.c_str());
 	fout << "dir " << fn << " maked"; 
 	sys = "cd " + fn;
 //	system(sys.c_str());
 //	sys = "zip -m " + fn + ".zip log.log";
 //	system(sys.c_str());
-	for (int i = 1; i <= 20; i ++) {
+	int Num;
+	ici >> Num;
+	for (int i = 1; i <= Num; i ++) {
 		string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
 		freopen(s.c_str(), "w", stdout);
 //		cout << s.c_str() << "\n";
@@ -43,9 +82,9 @@ int main() {
 		freopen(s.c_str(), "r", stdin);
 		freopen(s2.c_str(), "w", stdout);
 		system("std.exe");
-		sys = "zip -u " + fn + "\\" + fn + ".zip " + "in" + to_string(i) + ".in";
+//		sys = "zip -u " + "output\\" + fn + "\\" + fn + ".zip " + "in" + to_string(i) + ".in";
 //		system(sys.c_str());
-		sys = "zip -u " + fn + "\\" + fn + ".zip " + "out" + to_string(i) + ".out";
+//		sys = "zip -u " + "output\\" + fn + "\\" + fn + ".zip " + "out" + to_string(i) + ".out";
 //		system(sys.c_str());
 //		cout << s2.c_str() << "\n";
 	}
