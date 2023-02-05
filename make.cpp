@@ -53,7 +53,8 @@ string strRand(int length) {			// length: 产生字符串的长度
 /*
 This code have a problem,so we will not use it 
 */
-
+vector <int> begin, end;
+vector <string> exe;
 int main() {
 	ios::sync_with_stdio(false);
 	ofstream fout("log.log");
@@ -69,7 +70,7 @@ int main() {
 	system(sys.c_str());
 	fout << "dir " << fn << " maked"; 
 	sys = "cd " + fn;
-//	system(sys.c_str());
+	system(sys.c_str());
 //	sys = "zip -m " + fn + ".zip log.log";
 //	system(sys.c_str());
 	int Num;
