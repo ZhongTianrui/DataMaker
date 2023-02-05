@@ -28,68 +28,63 @@ string strRand(int length) {			// length: 产生字符串的长度
     }
     return buffer;
 }
-//int ReadJsonNum() {
-//	Json::Reader reader;
-//	Json::Value root;
-//	ifstream fin("config.json", ios::binary);
-//	if (reader.parse(fin, root)) {
-////		J.Name = root["Name"].asString();
-//		return root["Number"].asInt();
-//	} else {
-//		return -1;
-//	}
-//	
-//}
-//string ReadJsonName() {
-//	Json::Reader reader;
-//	Json::Value root;
-//	ifstream fin("config.json", ios::binary);
-//	if (reader.parse(fin, root)) {
-//		return root["Name"].asString();
-//	} else {
-//		return "err";
-//	}
-//}
-/*
-This code have a problem,so we will not use it 
-*/
 vector <int> begin, end;
 vector <string> exe;
 int main() {
 	ios::sync_with_stdio(false);
 	ofstream fout("log.log");
-	ifstream ic("config\\Name.txt"), ici("config\\Number.txt");
+	ifstream finname("config\\Name.txt"), finnum("config\\Number.txt"), finbind("config\\bind.txt"), finexe("config\\exe.txt");
 	string fn = strRand(10), sys = "mkdir " + fn;
 	string fnn;
-	ic >> fnn;
+	finname >> fnn;
 	if (fnn != "random") {
 		fn = fnn;
 	}
-//	system("cd output");
 	sys = "mkdir " + fn;
 	system(sys.c_str());
 	fout << "dir " << fn << " maked"; 
 	sys = "cd " + fn;
-	system(sys.c_str());
-//	sys = "zip -m " + fn + ".zip log.log";
 //	system(sys.c_str());
-	int Num;
-	ici >> Num;
-	for (int i = 1; i <= Num; i ++) {
-		string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
-		freopen(s.c_str(), "w", stdout);
-//		cout << s.c_str() << "\n";
-		system("makedata.exe"); 
-		freopen(s.c_str(), "r", stdin);
-		freopen(s2.c_str(), "w", stdout);
-		system("std.exe");
-//		sys = "zip -u " + "output\\" + fn + "\\" + fn + ".zip " + "in" + to_string(i) + ".in";
-//		system(sys.c_str());
-//		sys = "zip -u " + "output\\" + fn + "\\" + fn + ".zip " + "out" + to_string(i) + ".out";
-//		system(sys.c_str());
-//		cout << s2.c_str() << "\n";
+	bool b;
+	finbind >> b;
+	if (!b) {
+		int Num;
+		finnum >> Num;
+		for (int i = 1; i <= Num; i ++) {
+			string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
+			freopen(s.c_str(), "w", stdout);
+			system("makedata.exe"); 
+			freopen(s.c_str(), "r", stdin);
+			freopen(s2.c_str(), "w", stdout);
+			system("std.exe");
+		}
+		sys = "zip -r -q -j " + fn + ".zip " + fn;
+		system(sys.c_str()); 
+	} else {
+		int numa, numb, cnt = 0;
+		string fname, exename;
+		finname >> fname;
+		ofstream off("config.yml");
+		while (finnum >> numa) {
+			finnum >> numb;
+			finexe >> exename;
+//			cout << numb << " " << exename;
+			for (int i = numa; i <= numb; i ++) {
+				string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
+				freopen(s.c_str(), "w", stdout);
+				system(exename.c_str()); 
+				freopen(s.c_str(), "r", stdin);
+				freopen(s2.c_str(), "w", stdout);
+				system("std.exe");
+				string fnnn = fn + "\\config.yml";
+				freopen(fnnn.c_str(), "w", stdout);
+				cout << i << ".in:\n";
+				cout << "  subtaskId: " << cnt << "\n";
+			}
+			cnt ++;
+		}
+		sys = "zip -r -q -j " + fn + ".zip " + fn;
+		system(sys.c_str()); 
 	}
-	sys = "zip -r -q -j " + fn + ".zip " + fn;
-	system(sys.c_str()); 
 	return 0;
 }
