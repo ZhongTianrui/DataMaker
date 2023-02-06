@@ -60,7 +60,7 @@ randqujian(int n, int m) ：随机区间，生成 m 个 [1,n] 的区间，自动
 
 randtree(int n) ：随机树，生成n个点，n-1条边，附带1e9的权值的树，自动打印
 
-randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 0，否则 with_num = 1
+randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 1，否则 with_num = 0
 
 Linux 端：
 
