@@ -72,6 +72,7 @@ update:
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
+| - | 准备推出评测系统的功能，给出暴力的代码和std，一键测试std。估计需要一段时间才能完成。 | 4.0 |
 | 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | [3.1](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.2) |
 | 2023/2/6 | 添加对于 Linux 的支持 | 3.1 |
 | 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改， ~~自动配置 config.yml~~ （由于你谷的 Bug，这个功能暂时无法实现） | [3.0](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.0) |
