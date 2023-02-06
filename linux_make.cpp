@@ -1,5 +1,5 @@
 #include <bits/stdc++.h>
-#include <windows.h>
+// #include <windows.h>
 using namespace std;
 using std::string;
 using std::random_device;
