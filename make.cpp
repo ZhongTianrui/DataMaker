@@ -8,19 +8,19 @@ struct js{
 	string Name;
 	int Num;
 };
-string strRand(int length) {			// length: ²úÉú×Ö·û´®µÄ³¤¶È
-    char tmp;							// tmp: Ôİ´æÒ»¸öËæ»úÊı
-    string buffer;						// buffer: ±£´æ·µ»ØÖµ
+string strRand(int length) {			// length: ï¿½ï¿½ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Ä³ï¿½ï¿½ï¿½
+    char tmp;							// tmp: ï¿½İ´ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+    string buffer;						// buffer: ï¿½ï¿½ï¿½æ·µï¿½ï¿½Öµ
     
-    // ÏÂÃæÕâÁ½ĞĞ±È½ÏÖØÒª:
-    random_device rd;					// ²úÉúÒ»¸ö std::random_device ¶ÔÏó rd
-    default_random_engine random(rd());	// ÓÃ rd ³õÊ¼»¯Ò»¸öËæ»úÊı·¢ÉúÆ÷ random
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ±È½ï¿½ï¿½ï¿½Òª:
+    random_device rd;					// ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ std::random_device ï¿½ï¿½ï¿½ï¿½ rd
+    default_random_engine random(rd());	// ï¿½ï¿½ rd ï¿½ï¿½Ê¼ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ random
     
     for (int i = 0; i < length; i++) {
-        tmp = random() % 36;	// Ëæ»úÒ»¸öĞ¡ÓÚ 36 µÄÕûÊı£¬0-9¡¢A-Z ¹² 36 ÖÖ×Ö·û
-        if (tmp < 10) {			// Èç¹ûËæ»úÊıĞ¡ÓÚ 10£¬±ä»»³ÉÒ»¸ö°¢À­²®Êı×ÖµÄ ASCII
+        tmp = random() % 36;	// ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ğ¡ï¿½ï¿½ 36 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½0-9ï¿½ï¿½A-Z ï¿½ï¿½ 36 ï¿½ï¿½ï¿½Ö·ï¿½
+        if (tmp < 10) {			// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ğ¡ï¿½ï¿½ 10ï¿½ï¿½ï¿½ä»»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Öµï¿½ ASCII
             tmp += '0';
-        } else {				// ·ñÔò£¬±ä»»³ÉÒ»¸ö´óĞ´×ÖÄ¸µÄ ASCII
+        } else {				// ï¿½ï¿½ï¿½ò£¬±ä»»ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ğ´ï¿½ï¿½Ä¸ï¿½ï¿½ ASCII
             tmp -= 10;
             tmp += 'A';
         }
@@ -33,7 +33,7 @@ vector <string> exe;
 int main() {
 	ios::sync_with_stdio(false);
 	ofstream fout("log.log");
-	ifstream finname("config\\Name.txt"), finnum("config\\Number.txt"), finbind("config\\bind.txt"), finexe("config\\exe.txt");
+	ifstream finname("config\\Name.txt"), finnum("config\\Number.txt"), finbind("config\\bind.txt"), finexe("config\\exe.txt"), findata("config\\data.txt");
 	string fn = strRand(10), sys = "mkdir " + fn;
 	string fnn;
 	finname >> fnn;
@@ -45,6 +45,28 @@ int main() {
 	fout << "dir " << fn << " maked"; 
 	sys = "cd " + fn;
 //	system(sys.c_str());
+	bool bb;
+	// findata >> bb;
+	// if (bb) {
+	// 	int Num; finnum >> Num;
+	// 	for (int i = 1; i <= Num; i ++) {
+	// 		string str = "data\\in" + to_string(i) + ".txt";
+	// 		freopen(str.c_str(), "r", stdin);
+	// 		str = fn + "\\in" + to_string(i) + ".in";
+	// 		freopen(str.c_str(), "w", stdout);
+	// 		string ch;
+	// 		while (getline(cin, ch)) {
+	// 			cout << ch << "\n";
+	// 		}
+	// 		str = "data\\out" + to_string(i) + ".txt";
+	// 		freopen(str.c_str(), "r", stdin);
+	// 		str = fn + "\\out" + to_string(i) + ".out";
+	// 		freopen(str.c_str(), "w", stdout);
+	// 		while (getline(cin, ch)) {
+	// 			cout << ch << "\n";
+	// 		}
+	// 	}
+	// }
 	bool b;
 	finbind >> b;
 	if (!b) {
