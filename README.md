@@ -54,13 +54,17 @@ randstr_lo(int length) ：随机小写字符串
 
 randstr_num(int length) ：随机数字串
 
+Linux 端：
+
+把 make.exe 替换成 linux_make.
+
 
 
 update:
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 添加对于 Linux 的支持 | 3.1 |
+| 2023/2/6 | 添加对于 Linux 的支持 | 3.1 |
 | 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改， ~~自动配置 config.yml~~ （由于你谷的 Bug，这个功能暂时无法实现） | 3.0 |
 |      2023/2/5 15:08          | 更新 make.hpp | 2.1 |
 |        2023/2/5 14:43        | 添加 config | 2.0 |
