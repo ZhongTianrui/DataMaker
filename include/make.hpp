@@ -89,7 +89,6 @@ string randstr_num(int length) {
 }
 int* randarr(int n) {
 //随机生成n<=1e5 个绝对值小于1e9的整数
-int n = random(100000) + 1;
 int m = 1e9;
 int a[1000005];
 for(int i = 1; i <= n; ++i)
@@ -118,7 +117,7 @@ for(int i = 2; i <= n; ++i)
 }
 }
 void randgra(int n, int m, bool with_num) {
-    pair<int, int> e[1000005];
+    pair<int, int> e[100005];
 map<pair<int, int>, bool> h;
 //先生成一棵树，保证连通
 for(int i = 1; i < n; ++i)
@@ -141,8 +140,13 @@ for(int i = n; i <= m; ++i)
 }
 //随机打乱输出
 random_shuffle(e + 1, e + m + 1);
+// cout << n << " " << m << " ";
+// if (ss != -1) cout << ss << " ";
+// if (tt != -1) cout << tt << " ";
+// cout << "\n";
 for(int i = 1; i <= m; ++i) {
     printf("%d %d ", e[i].first, e[i].second);
     if (with_num) printf("%d\n", randint(1, 1e3));
+    else printf("\n");
 }
 }

@@ -54,6 +54,14 @@ randstr_lo(int length) ：随机小写字符串
 
 randstr_num(int length) ：随机数字串
 
+randarr(int n) ：随机数组，返回 int*
+
+randqujian(int n, int m) ：随机区间，生成 m 个 [1,n] 的区间，自动打印
+
+randtree(int n) ：随机树，生成n个点，n-1条边，附带1e9的权值的树，自动打印
+
+randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 0，否则 with_num = 1
+
 Linux 端：
 
 把 make.exe 替换成 linux_make.exe
@@ -64,7 +72,7 @@ update:
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | 3.2 |
+| 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | 3.2 |
 | 2023/2/6 | 添加对于 Linux 的支持 | 3.1 |
 | 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改， ~~自动配置 config.yml~~ （由于你谷的 Bug，这个功能暂时无法实现） | 3.0 |
 |      2023/2/5 15:08          | 更新 make.hpp | 2.1 |
