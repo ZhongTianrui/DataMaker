@@ -1,13 +1,14 @@
 # DataMaker
 一个为OIer准备的数据制造系统，想要造出数据？只需要打开makedata.cpp，用cout和我们提供的随机函数，即可造出多组强大的数据
 
-优点：
+## 优点：
 
 1. 依赖于 c++，OIer 的福利
 2. 自动生成 zip 文件，不用手动生成
 3. 速度快
 
-用法：
+## 用法：
+
 1. 打开 makedata.cpp，使用函数库自定义随机数，用cout进行输出。主程序的第一行必须是 `pre();`
 
 2. 打开 std.cpp，放上标程
@@ -38,7 +39,7 @@
 
 储存库中的文件是一个 A+B Problem 的示例
 
-程序库：
+## 程序库：
 
 randint() ：随机整型，支持 `long long`
 
@@ -62,13 +63,15 @@ randtree(int n) ：随机树，生成n个点，n-1条边，附带1e9的权值的
 
 randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 1，否则 with_num = 0
 
-Linux 端：
+## Linux 端：
 
 把 make.exe 替换成 linux_make.exe
 
+## 其他：
 
+目前想不到有啥要更新的了，大佬们帮着想一想吧...(/▽＼)
 
-update:
+## update:
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
