@@ -42,7 +42,7 @@ int main() {
 	}
 	sys = "mkdir " + fn;
 	system(sys.c_str());
-	fout << "dir " << fn << " maked"; 
+	fout << "dir " << fn << " maked\n"; 
 	sys = "cd " + fn;
 //	system(sys.c_str());
 	bool bb;
@@ -79,6 +79,7 @@ int main() {
 			freopen(s.c_str(), "r", stdin);
 			freopen(s2.c_str(), "w", stdout);
 			system("std.exe");
+			fout << i << ".out/.in Maked\n";
 		}
 		sys = "zip -r -q -j " + fn + ".zip " + fn;
 		system(sys.c_str()); 
@@ -104,8 +105,10 @@ int main() {
 				off << "in"<< i << ".in:\n";
 				off << "  subtaskId: " << cnt << "\n";
 				off << "\n";
+				fout << i << ".out/.in Maked\n";
 			}
 			cnt ++;
+			
 		}
 		sys = "zip -r -q -j " + fn + ".zip " + fn;
 		system(sys.c_str()); 
