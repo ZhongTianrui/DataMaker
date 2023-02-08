@@ -75,6 +75,7 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
+| 2023/2/8 | 程序会将输出放在 log.log | 3.1 |
 | 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | [3.1](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.2) |
 | 2023/2/6 | 添加对于 Linux 的支持 | 3.1 |
 | 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改， ~~自动配置 config.yml~~ （由于你谷的 Bug，这个功能暂时无法实现） | [3.0](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.0) |
