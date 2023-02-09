@@ -8,7 +8,7 @@ struct js{
 	string Name;
 	int Num;
 };
-string strRand(int length) {			// length: �����ַ����ĳ���
+string strRand(int length) {			// length: �����ַ����ĳ���	
     char tmp;							// tmp: �ݴ�һ�������
     string buffer;						// buffer: ���淵��ֵ
     
