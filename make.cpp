@@ -39,6 +39,7 @@ int main() {
 	finname >> fnn;
 	if (fnn != "random") {
 		fn = fnn;
+		fn = "data-" + fn;	
 	}
 	sys = "mkdir " + fn;
 	system(sys.c_str());
@@ -70,19 +71,21 @@ int main() {
 	bool b;
 	finbind >> b;
 	if (!b) {
+		string exename;
+		finexe >> exename;
 		int Num;
 		finnum >> Num;
 		for (int i = 1; i <= Num; i ++) {
 			string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
 			freopen(s.c_str(), "w", stdout);
-			system("makedata.exe"); 
+			system(exename.c_str()); 
 			freopen(s.c_str(), "r", stdin);
 			freopen(s2.c_str(), "w", stdout);
 			system("std.exe");
 			fout << i << ".out/.in Maked\n";
 		}
-		sys = "zip -r -q -j " + fn + ".zip " + fn;
-		system(sys.c_str()); 
+		// sys = "zip -r -q -j " + fn + ".zip " + fn;
+		// system(sys.c_str()); 
 	} else {
 		int numa, numb, cnt = 0;
 		string fname, exename;
@@ -90,6 +93,8 @@ int main() {
 		string fnnn = fn + "\\config.yml";
 		ofstream off;
 		off.open(fn + "\\config.yml");
+		int T; finnum >> T;
+		int mT = 100 % T;
 		while (finnum >> numa) {
 			finnum >> numb;
 			finexe >> exename;
@@ -104,14 +109,18 @@ int main() {
 //				freopen(fnnn.c_str(), "w", stdout);
 				off << "in"<< i << ".in:\n";
 				off << "  subtaskId: " << cnt << "\n";
+				if (cnt >= T - mT) off << "  score: " << 100 / T + 1 << "\n";
+				else off << "  score: " << 100 / T << "\n";
 				off << "\n";
 				fout << i << ".out/.in Maked\n";
 			}
 			cnt ++;
 			
 		}
-		sys = "zip -r -q -j " + fn + ".zip " + fn;
-		system(sys.c_str()); 
+		
+		 
 	}
+	sys = "zip -r -q -j " + fn + ".zip " + fn;
+	system(sys.c_str());
 	return 0;
 }

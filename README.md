@@ -14,7 +14,7 @@
 
 2. 打开 std.cpp，放上标程
 
-3. 确保前面的 2 个文件编辑后又编译了一遍
+3. 记得保存。
 
 4. 打开 config 文件夹
 
@@ -34,13 +34,13 @@
    makefile2.exe
    ```
 
-5. 运行 make.exe，程序如果运行了一会后自动结束了，那么说明你成功了！
+5. 运行 run.bat，程序如果运行了一会后自动结束了，那么说明你成功了！（注意，如果发现程序卡住了，且电脑风扇转的很快，请关闭程序后重新打开）。
 
-6. 直接把 “文件夹名.zip”上传到洛谷上就行了
+6. 直接把 “data-文件夹名.zip”上传到洛谷上就行了。
 
-储存库中的文件是一个 单源最短路 的示例
+储存库中的 config 文件夹是一个 单源最短路 的示例。
 
-## 程序库：
+## 函数库：
 
 randint() ：随机整型，支持 `long long`
 
@@ -68,18 +68,15 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 把 make.exe 替换成 linux_make.exe
 
-## 其他：
-
-目前想不到有啥要更新的了，大佬们帮着想一想吧...(/▽＼)
-
 ## update:
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 更改文件结构 | 2.4 |
+| - | 增加多种捆绑模式，增加多数据分类，增加 py 生成数据。 | 2.4 |
+| 2024/2/2 | 修复捆绑，自动配置 config.yml 文件 | 2.3.2 |
 | 2023/2/8 | 程序会将输出放在 log.log | 2.3.1 |
-| 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图，添加对于 Linux 的支持 | [2.3](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.2) |
-| 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改， ~~自动配置 config.yml~~ （由于你谷的 Bug，这个功能暂时无法实现） | [2.2](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.0) |
+| 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图，~~添加对于 Linux 的支持~~ | [2.3](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.2) |
+| 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改 | [2.2](https://github.com/ZhongTianrui/DataMaker/releases/tag/v3.0) |
 |      2023/2/5 15:08          | 更新 make.hpp | [2.1](https://github.com/ZhongTianrui/DataMaker/releases/tag/v2.1) |
 |        2023/2/5 14:43        | 添加 config | 2.0 |
 |2023/2/4 21:00 |完成 1.0 版本|1.0|
