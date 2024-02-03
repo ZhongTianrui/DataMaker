@@ -7,18 +7,15 @@
     "subtasks": [
         {
             "begin": 1,
-            "end": 20, 
-            "exename":"makedata"
+            "end": 20
         }, 
         {
             "begin": 21,
-            "end": 30, 
-            "exename":"makedata"
+            "end": 30
         }, 
         {
             "begin": 31,
-            "end": 40, 
-            "exename":"makedata"
+            "end": 40
         }
     ]
 }

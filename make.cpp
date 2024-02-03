@@ -35,28 +35,29 @@ string strRand(int length) {			// length: �����ַ����ĳ���
     return buffer;
 }
 
-int _execute(string cmd){
+int _execute(string cmd, int t){
+	if (t != -1) cmd = cmd + " " + to_string(t);
     return system(cmd.c_str());
 }
 #ifdef _WIN32
 
-int execute(string name){
-    return _execute(name + ".exe");
+int execute(string name, int t){
+    return _execute(name + ".exe", t);
 }
 #else
-int execute(string name){
-    return _execute("./"+name);
+int execute(string name, int t){
+    return _execute("./"+name, t);
 }
 #endif
 
 
-void generate(string fn, int id, string exename, string std, zip_file& zf){
+void generate(string fn, int id, string exename, string std, zip_file& zf, int t = -1){
 	string inp = fn + "/" + "in" + to_string(id) + ".in", out = fn + "/" + "out" + to_string(id) + ".out";
 	freopen(inp.c_str(), "w", stdout);
-	execute(exename); 
+	execute(exename, t); 
 	freopen(inp.c_str(), "r", stdin);
 	freopen(out.c_str(), "w", stdout);
-	execute(std);	
+	execute(std, -1);	
 	    zf.write(inp);
 	    zf.write(out);
 }
@@ -99,10 +100,11 @@ int main() {
 		
 		for(int t=0;t<T;t++){
 			int begin = task_config[t]["begin"], end = task_config[t]["end"];
-			exename = task_config[t]["exename"];
+			// exename = task_config[t]["exename"];
+			exename = config["exename"];
 			for (int i=begin; i <= end; i ++){
 				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
-			    generate(fn, i, exename, config["std"], zf);
+			    generate(fn, i, exename, config["std"], zf, t);
 				off << "in"<< i << ".in:\n";
 				off << "  subtaskId: " << cnt << "\n";
 				if (cnt >= T - lasttask) off << "  score: " << 100 / T + 1 << "\n";
@@ -126,10 +128,11 @@ int main() {
 		// fout << lastsu << "\n";
 		for(int t=0;t<T;t++){
 			int begin = task_config[t]["begin"], end = task_config[t]["end"];
-			exename = task_config[t]["exename"];
+			// exename = task_config[t]["exename"];
+			exename = config["exename"];
 			for (int i=begin; i <= end; i ++){
 				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
-			    generate(fn, i, exename, config["std"], zf);
+			    generate(fn, i, exename, config["std"], zf, t);
 				off << "in"<< i << ".in:\n";
 				off << "  subtaskId: " << cnt << "\n";
 				if (cnt >= su - lastsu) off << "  score: " << 100 / su + 1 << "\n";
