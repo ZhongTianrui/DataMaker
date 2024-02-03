@@ -89,16 +89,16 @@ int main() {
 			generate(fn, i, exename, config["std"], zf);
 			fout << i << ".out/.in Maked\n";
 		}
-	} else {
+	} else if (mode == 1) {
 		int cnt = 0;
 		string exename;
 		ofstream off(fn + "\\config.yml");
-		int T=config["test_amount"];
+		int T=config["task_amount"];
 		int lasttask = 100 % T;
 		json task_config = config["subtasks"];
 		
 		for(int t=0;t<T;t++){
-			int begin = task_config[t]["begin"], end = task_config[t][end];
+			int begin = task_config[t]["begin"], end = task_config[t]["end"];
 			exename = task_config[t]["exename"];
 			for (int i=begin; i <= end; i ++){
 				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
@@ -111,6 +111,34 @@ int main() {
 				fout << i << ".out/.in Maked\n";
 			}
 			cnt++;
+		}
+		
+		zf.write(fn+"\\config.yml");
+	} else {
+		int cnt = 0;
+		string exename;
+		ofstream off(fn + "\\config.yml");
+		int T=config["task_amount"];
+		int lasttask = 100 % T;
+		json task_config = config["subtasks"];
+		int su = task_config[T - 1]["end"];
+		int lastsu = 100 % su;
+		// fout << lastsu << "\n";
+		for(int t=0;t<T;t++){
+			int begin = task_config[t]["begin"], end = task_config[t]["end"];
+			exename = task_config[t]["exename"];
+			for (int i=begin; i <= end; i ++){
+				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
+			    generate(fn, i, exename, config["std"], zf);
+				off << "in"<< i << ".in:\n";
+				off << "  subtaskId: " << cnt << "\n";
+				if (cnt >= su - lastsu) off << "  score: " << 100 / su + 1 << "\n";
+				else off << "  score: " << 100 / su << "\n";
+				off << "\n";
+				fout << i << ".out/.in Maked\n";
+				cnt ++;
+			}
+			
 		}
 		
 		zf.write(fn+"\\config.yml");

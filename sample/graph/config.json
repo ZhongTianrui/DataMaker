@@ -1,7 +1,7 @@
 {
     "name": "graph",
-    "mode": 1,
+    "mode": 0,
     "exename": "makedata",
     "std": "std",
-    "test_amount": 20
+    "task_amount": 20
 }
