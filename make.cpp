@@ -104,6 +104,7 @@ int main() {
 				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
 			    generate(fn, i, exename, config["std"], zf);
 				off << "in"<< i << ".in:\n";
+				off << "  subtaskId: " << cnt << "\n";
 				if (cnt >= T - lasttask) off << "  score: " << 100 / T + 1 << "\n";
 				else off << "  score: " << 100 / T << "\n";
 				off << "\n";
