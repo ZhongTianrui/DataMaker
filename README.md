@@ -18,7 +18,7 @@
 
 4. 打开 config.json
 
-   在 enable_subtask 输入 `0` 或 `1`，表示是否开启 subtask
+   在 make 中选择模式
 
    在 name 中写入测试组的名称，如果输入 random，程序会随机生成一个十位字符串
    在 std 中写入参考程序的路径
