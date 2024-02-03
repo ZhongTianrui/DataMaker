@@ -87,33 +87,34 @@ string randstr_num(int length) {
     }
     return buffer;
 }
-int* randarr(int n) {
-//随机生成任意个绝对值小于1e9的整数
-int m = 1e9;
+int* randarr(int n, int l, int r) {
+//随机生成n个[l, r]的整数
 int* a = new int[n+1];
 for(int i = 1; i <= n; ++i)
 {
-    a[i] = random(2 * m + 1) - m;
+    a[i] = randint(l, r);
 }
 return a;
 }
-void randqujian(int n, int m) {
-//生成m个[1,n] 的子区间
+void randqujian(int m, int l, int r) {
+//生成m个[,r] 的子区间
 for(int i = 1; i <= m; ++i)
 {
-    int l = random(n) + 1;
-    int r = random(n) + 1;
+    int l = randint(l, r) + 1;
+    int r = randint(l, r) + 1;
     if(l > r) swap(l, r);
     printf("%d %d\n", l, r);
 }
 }
-void randtree(int n) {
+void randtree(int n, int with_num, int r = 0) {
     //生成n个点，n-1条边，附带1e9的权值的树
 for(int i = 2; i <= n; ++i)
 {   //从点i向1~i-1 之间的点随机连一条边
     int fa = random(i - 1) + 1;
-    int val = random(1000000000) + 1;
-    printf("%d %d %d\n", fa, i, val);
+    int val;
+    if (r != 0) val = random(r) + 1;
+    if (with_num) printf("%d %d %d\n", fa, i, val);
+    else cout << fa << ' ' << i << "\n";
 }
 }
 void randgra(int n, int m, bool with_num) {

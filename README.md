@@ -18,19 +18,46 @@
 
 4. 打开 config.json
 
-   在 make 中选择模式
+   在 mode 中选择模式
 
    在 name 中写入测试组的名称，如果输入 random，程序会随机生成一个十位字符串
    在 std 中写入参考程序的路径
-   
-   如果启用 subtask:
-       在 test_amount 中写入 subtask 的个数
-       在 subtasks 中写入一个 json 的列表，每一个内容里包含三个值，begin 代表测试点的开始，end 代表测试点的结束，exename 代表生成器的路径
-   如果不启用 subtask:
-       在 test_amount 中写入测试点的个数
-       在 exename 中写入数据生成器的路径
 
-   注意上述的所有写入的程序路径均不以`./`开头或`.exe`结尾，应该用`/`作为路径分隔符而不是`\\`。
+   如果启用 subtask:
+       在 task_amount 中写入 subtask 的个数
+       在 subtasks 中写入一个 json 的列表，每一个内容里包含两个个值，begin 代表测试点的开始，end 代表测试点的结束。
+
+   ​	在 exename 中写入输入生成器的路径
+
+   ​	可以在输入生成器中区分不同层次的数据范围，注意写完后调试输入生成器。使用方法如：
+
+   ```cpp
+   #include <bits/stdc++.h>
+   #include "includes/make.hpp"
+   using namespace std;
+   int main(int argc, char* argv[]) {
+   	ios::sync_with_stdio(false);
+   	pre();
+   	/*make your data here
+   	use cout in output
+   	*/
+   	if (argv[1][0] == '0') cout << randint(1, 1e4) << " " << randint(1, 1e4);//第一种情况
+   	else if (argv[1][0] == '1') cout << randint(1, 1e7) << " " << randint(1, 1e7);//第二种
+   	else if (argv[1][0] == '2') cout << randint(1, 1e9) << " " << randint(1, 1e9);//第三种
+   	else cout << "err";//如果 config 写的是对的话，这种情况不会发生
+       //每一个 subtask 对应一个
+   	return 0;
+   }
+   
+   ```
+
+   
+
+   如果不启用 subtask:
+       在 task_amount 中写入测试点的个数
+       在 exename 中写入输入生成器的路径
+
+   注意上述的所有写入的程序路径均不以 `./` 开头或 `.exe` 结尾，应该用 `/` 作为路径分隔符而不是 `\\`。
 
 5. 运行 run.bat/run.sh，程序如果运行了一会后自动结束了，那么说明你成功了！（注意，如果发现程序卡住了，且电脑风扇转的很快，请关闭程序后重新打开）。
 
@@ -54,11 +81,11 @@ randstr_lo(int length) ：随机小写字符串
 
 randstr_num(int length) ：随机数字串
 
-randarr(int n) ：随机数组，返回 int*
+randarr(int n, int l, int r) ：随机数组，范围 [l, r]，返回 int*
 
-randqujian(int n, int m) ：随机区间，生成 m 个 [1,n] 的区间，自动打印
+randqujian(int m, int l, int r) ：随机区间，生成 m 个 [l, r] 的区间，自动打印
 
-randtree(int n) ：随机树，生成n个点，n-1条边，附带1e9的权值的树，自动打印
+randtree(int n, bool with_num, int r = 0) ：随机树，生成n个点，n-1 条边，可以选择是否带权，权值 [1, r]，自动打印。(如果不需要权值，不用传入 r)。
 
 randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 1，否则 with_num = 0
 
@@ -68,7 +95,7 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 原本的捆绑选线变为模式选项，增加数据分层模式，支持在 makedata.cpp 中配置，把调用 makedata.cpp 的代码中增加命令行参数传入，更新随机区间函数，重新制作 make.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 3.0 |
+| - | 原本的捆绑选项变为模式选项，增加数据分层模式，把调用 makedata.cpp 的代码中增加命令行参数传入，更新函数库，重新制作 make.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 3.0 |
 | 2024/2/2 | 修复捆绑，自动配置 config.yml 文件 | 2.3.2 |
 | 2023/2/8 | 程序会将输出放在 log.log | 2.3.1 |
 | 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | [2.3](https://github.com/ZhongTianrui/DataMaker/releases/tag/2.3) |
