@@ -77,11 +77,11 @@ int main() {
 	}
 	create_directories(fn);
 	fout.flush();
-	int subtask=config["enable_subtask"];
+	int mode=config["mode"];
 	zip_file zf;
 	
 	int amount=0;
-	if (!subtask) {
+	if (mode==0) {
 		string exename=config["exename"];
 		
 		amount=config["test_amount"];
