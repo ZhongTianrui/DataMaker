@@ -10,6 +10,6 @@ int main() {
 	int n = randint(1e2, 1e3), m = randint(n, 1e4), s = randint(1, n);
 	// int n = 10, m = 10, s = 1;
 	cout << n << " " << m << " " << s << "\n";
-	 randgra(n, m, 1);
+	randgra(n, m, 1);
 	return 0;
 }

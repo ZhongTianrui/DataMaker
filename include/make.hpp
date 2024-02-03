@@ -88,9 +88,9 @@ string randstr_num(int length) {
     return buffer;
 }
 int* randarr(int n) {
-//随机生成n<=1e5 个绝对值小于1e9的整数
+//随机生成任意个绝对值小于1e9的整数
 int m = 1e9;
-int a[1000005];
+int* a = new int[n+1];
 for(int i = 1; i <= n; ++i)
 {
     a[i] = random(2 * m + 1) - m;

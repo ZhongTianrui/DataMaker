@@ -1,0 +1,7 @@
+{
+    "name": "example",
+    "enable_subtask": false,
+    "exename": "makedata",
+    "std": "std",
+    "test_amount": 10
+}

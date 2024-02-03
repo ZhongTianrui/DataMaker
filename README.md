@@ -16,23 +16,21 @@
 
 3. 记得保存。
 
-4. 打开 config 文件夹
+4. 打开 config.json
 
-   在 bind.txt 输入 `0` 或 `1`，表示是否开启 subtask
+   在 enable_subtask 输入 `0` 或 `1`，表示是否开启 subtask
 
-   在 Number.txt 中输入多行或者一行
+   在 name 中写入测试组的名称，如果输入 random，程序会随机生成一个十位字符串
+   在 std 中写入参考程序的路径
+    
+   如果启用 subtask:
+       在 test_amount 中写入 subtask 的个数
+       在 subtasks 中写入一个 json 的列表，每一个内容里包含三个值，begin 代表测试点的开始，end 代表测试点的结束，exename 代表生成器的路径
+   如果不启用 subtask:
+       在 test_amount 中写入测试点的个数
+       在 exename 中写入数据生成器的路径
 
-   - 如果开启 subtask ：每行有 2 个整数，分别表示这个 subtask 的起点数据下标和终点下表
-   - 如果不开启，输入一个数表示数据组数。
-
-   在 Name.txt 中输入一个全字母的字符串，表示文件名，如果为了避免重复，输入 random，程序会自动生成一个 10 位字符串
-
-   在 exe.txt 中输入多行，每一行一个字符串表示每一个 subtask 对应的数据生成源文件，如：
-
-   ```cpp
-   makefile.exe
-   makefile2.exe
-   ```
+   注意上述的所有写入的程序路径均不以`./`开头或`.exe`结尾，应该用`/`作为路径分隔符而不是`\\`。
 
 5. 运行 run.bat，程序如果运行了一会后自动结束了，那么说明你成功了！（注意，如果发现程序卡住了，且电脑风扇转的很快，请关闭程序后重新打开）。
 
