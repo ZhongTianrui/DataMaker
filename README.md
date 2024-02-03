@@ -68,10 +68,10 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 原本的捆绑选线变为模式选项，增加数据分层模式，支持在 makedata.cpp 中配置，把调用 makedata.cpp 的代码中增加命令行参数传入，更新随机区间函数，重新制作 made.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 2.4 |
+| - | 原本的捆绑选线变为模式选项，增加数据分层模式，支持在 makedata.cpp 中配置，把调用 makedata.cpp 的代码中增加命令行参数传入，更新随机区间函数，重新制作 make.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 3.0 |
 | 2024/2/2 | 修复捆绑，自动配置 config.yml 文件 | 2.3.2 |
 | 2023/2/8 | 程序会将输出放在 log.log | 2.3.1 |
-| 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图，~~添加对于 Linux 的支持~~ | [2.3](https://github.com/ZhongTianrui/DataMaker/releases/tag/2.3) |
+| 2023/2/6 | 更新 make.hpp，添加随机数组，随机区间，随机树，随机图 | [2.3](https://github.com/ZhongTianrui/DataMaker/releases/tag/2.3) |
 | 2023/2/5 21:03 | 添加捆绑测试点的支持，整个框架都会更改 | [2.2](https://github.com/ZhongTianrui/DataMaker/releases/tag/v2.2) |
 |      2023/2/5 15:08          | 更新 make.hpp | [2.1](https://github.com/ZhongTianrui/DataMaker/releases/tag/v2.1) |
 |        2023/2/5 14:43        | 添加 config | 2.0 |
