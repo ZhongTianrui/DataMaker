@@ -35,34 +35,35 @@ string strRand(int length) {			// length: �����ַ����ĳ���
     return buffer;
 }
 
-int _execute(string cmd, int t){
-	if (t != -1) cmd = cmd + " " + to_string(t);
-    return system(cmd.c_str());
-}
 #ifdef _WIN32
-
-int execute(string name, int t){
-    return _execute(name + ".exe", t);
-}
+string resolve_name(string name){ return name; }
 #else
-int execute(string name, int t){
-    return _execute("./"+name, t);
-}
+string resolve_name(string name){ return "./"+name; }
 #endif
+int _execute(string complete){
+    return system(complete.c_str());
+}
+int execute(string cmd){
+    return _execute(resolve_name(cmd));
+}
+int execute(vector<string> cmd){
+	string complete;
+	for(string c:cmd)complete+=" ";
+    return execute(complete);
+}
 
 
-void generate(string fn, int id, string exename, string std, zip_file& zf, int t = -1){
+
+void generate(string fn, int id, string exename, string std, zip_file& zf, int assumeid){
 	string inp = fn + "/" + "in" + to_string(id) + ".in", out = fn + "/" + "out" + to_string(id) + ".out";
 	freopen(inp.c_str(), "w", stdout);
-	execute(exename, t); 
+	execute({exename, to_string(assumeid)}); 
 	freopen(inp.c_str(), "r", stdin);
 	freopen(out.c_str(), "w", stdout);
-	execute(std, -1);	
-	    zf.write(inp);
-	    zf.write(out);
+	execute({std});	
+	zf.write(inp);
+	zf.write(out);
 }
-
-vector <int> begin, end;
 
 int main() {
 	ios::sync_with_stdio(false);
@@ -71,11 +72,7 @@ int main() {
 	ifstream config_file("config.json");
 	json config = json::parse(config_file);
 	string fn=config["name"];
-	if (fn == "random") {
-		fn = strRand(10);
-	}else{
-	    fn = "data-"+fn;
-	}
+	fn="data-"+fn;
 	create_directories(fn);
 	fout.flush();
 	int mode=config["mode"];
@@ -87,14 +84,14 @@ int main() {
 		
 		amount=config["test_amount"];
 		for (int i = 1; i <= amount; i ++) {
-			generate(fn, i, exename, config["std"], zf);
+			generate(fn, i, exename, config["std"], zf, i);
 			fout << i << ".out/.in Maked\n";
 		}
 	} else if (mode == 1) {
 		int cnt = 0;
 		string exename;
 		ofstream off(fn + "\\config.yml");
-		int T=config["task_amount"];
+		int T=config["subtasks"].size();
 		int lasttask = 100 % T;
 		json task_config = config["subtasks"];
 		
@@ -120,7 +117,7 @@ int main() {
 		int cnt = 0;
 		string exename;
 		ofstream off(fn + "\\config.yml");
-		int T=config["task_amount"];
+		int T=config["subtasks"].size();
 		int lasttask = 100 % T;
 		json task_config = config["subtasks"];
 		int su = task_config[T - 1]["end"];

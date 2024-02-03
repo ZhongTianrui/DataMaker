@@ -20,11 +20,10 @@
 
    在 mode 中选择模式：模式 0：no subtask，模式 1：subtask 捆绑，模式 2：subtask 不捆绑
 
-   在 name 中写入测试组的名称，如果输入 random，程序会随机生成一个十位字符串
+   在 name 中写入测试组的名称
    在 std 中写入参考程序的路径
 
    如果启用 subtask:
-       在 task_amount 中写入 subtask 的个数
        在 subtasks 中写入一个 json 的列表，每一个内容里包含两个个值，begin 代表测试点的开始，end 代表测试点的结束。
 
    ​	在 exename 中写入输入生成器的路径
@@ -54,7 +53,7 @@
    
 
    如果不启用 subtask:
-       在 task_amount 中写入测试点的个数
+       在 test_amount 中写入测试点的个数
        在 exename 中写入输入生成器的路径
 
    注意上述的所有写入的程序路径均不以 `./` 开头或 `.exe` 结尾，应该用 `/` 作为路径分隔符而不是 `\\`。
@@ -91,10 +90,9 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 ## update:
 
-- [x] 原本的捆绑选线变为模式选项，增加数据分层模式
-
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
+| - | 移除随机名称功能，部分重构 make.cpp，移除task_amount参数 | 3.1 |
 | 2024/2/3 | 原本的捆绑选项变为模式选项，增加数据分层模式，把调用 makedata.cpp 的代码中增加命令行参数传入，更新函数库，重新制作 make.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 3.0 |
 | 2024/2/2 | 修复捆绑，自动配置 config.yml 文件 | 2.3.2 |
 | 2023/2/8 | 程序会将输出放在 log.log | 2.3.1 |
