@@ -1,5 +1,7 @@
 log.log
 
+/.vscode
+
 # Created by https://www.toptal.com/developers/gitignore/api/windows,c++
 # Edit at https://www.toptal.com/developers/gitignore?templates=windows,c++
 
