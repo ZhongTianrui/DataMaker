@@ -1,126 +1,111 @@
-#include <bits/stdc++.h>
-#include <windows.h>
+#define _CRT_SECURE_NO_WARNINGS
+#include<fstream>
+#include<vector>
+#include<filesystem>
+#include<cstdlib>
+#include<random>
+#include "json.hpp"
 using namespace std;
-using std::string;
-using std::random_device;
-using std::default_random_engine;
+using namespace std::filesystem;
+using json = nlohmann::json;
+
 struct js{
 	string Name;
 	int Num;
 };
-string strRand(int length) {			// length: �����ַ����ĳ���	
-    char tmp;							// tmp: �ݴ�һ�������
-    string buffer;						// buffer: ���淵��ֵ
+random_device rd;
+
+struct random{
+    default_random_engine rdm;
+    uniform_int_distribution<> dis;
     
-    // ���������бȽ���Ҫ:
-    random_device rd;					// ����һ�� std::random_device ���� rd
-    default_random_engine random(rd());	// �� rd ��ʼ��һ������������� random
+    random(int low, int up){ rdm=default_random_engine(rd()); dis=uniform_int_distribution(low, up); }
+    int operator() (){
+        return dis(rdm);
+    }
+};
+
+
+string strRand(int length) {			// length: �����ַ����ĳ���	
+    string buffer;						// buffer: ���淵��ֵ
+    string charset="abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    
+    random rdm(0, charset.size() - 1);
     
     for (int i = 0; i < length; i++) {
-        tmp = random() % 36;	// ���һ��С�� 36 ��������0-9��A-Z �� 36 ���ַ�
-        if (tmp < 10) {			// ��������С�� 10���任��һ�����������ֵ� ASCII
-            tmp += '0';
-        } else {				// ���򣬱任��һ����д��ĸ�� ASCII
-            tmp -= 10;
-            tmp += 'A';
-        }
-        buffer += tmp;
+        buffer += charset[rdm()];
     }
     return buffer;
 }
+
+int _execute(string cmd){
+    return system(cmd.c_str());
+}
+#ifdef _WIN32
+int execute(string name){
+    return _execute(name + ".exe");
+}
+#else
+int execute(string name){
+    return _execute("./"+name);
+}
+#endif
+void generate(string fn, int id, string exename, string std){
+	string inp = fn + "/" + "in" + to_string(id) + ".in", out = fn + "/" + "out" + to_string(id) + ".out";
+	freopen(inp.c_str(), "w", stdout);
+	execute(exename); 
+	freopen(inp.c_str(), "r", stdin);
+	freopen(out.c_str(), "w", stdout);
+	execute(std);	
+}
+
 vector <int> begin, end;
-vector <string> exe;
+
 int main() {
 	ios::sync_with_stdio(false);
 	ofstream fout("log.log");
-	ifstream finname("config\\Name.txt"), finnum("config\\Number.txt"), finbind("config\\bind.txt"), finexe("config\\exe.txt"), findata("config\\data.txt");
-	string fn = strRand(10), sys = "mkdir " + fn;
-	string fnn;
-	finname >> fnn;
-	if (fnn != "random") {
-		fn = fnn;
-		fn = "data-" + fn;	
+	//ifstream finname("config/Name.txt"), finnum("config/Number.txt"), finbind("config/bind.txt"), finexe("config/exe.txt"), findata("config/data.txt");
+	ifstream config_file("config.json");
+	json config = json::parse(config_file);
+	string fn=config["name"];
+	if (fn == "random") {
+		fn = strRand(10);
+	}else{
+	    fn = "data-"+fn;
 	}
-	sys = "mkdir " + fn;
-	system(sys.c_str());
-	fout << "dir " << fn << " maked\n"; 
-	sys = "cd " + fn;
-//	system(sys.c_str());
-	bool bb;
-	// findata >> bb;
-	// if (bb) {
-	// 	int Num; finnum >> Num;
-	// 	for (int i = 1; i <= Num; i ++) {
-	// 		string str = "data\\in" + to_string(i) + ".txt";
-	// 		freopen(str.c_str(), "r", stdin);
-	// 		str = fn + "\\in" + to_string(i) + ".in";
-	// 		freopen(str.c_str(), "w", stdout);
-	// 		string ch;
-	// 		while (getline(cin, ch)) {
-	// 			cout << ch << "\n";
-	// 		}
-	// 		str = "data\\out" + to_string(i) + ".txt";
-	// 		freopen(str.c_str(), "r", stdin);
-	// 		str = fn + "\\out" + to_string(i) + ".out";
-	// 		freopen(str.c_str(), "w", stdout);
-	// 		while (getline(cin, ch)) {
-	// 			cout << ch << "\n";
-	// 		}
-	// 	}
-	// }
-	bool b;
-	finbind >> b;
-	if (!b) {
-		string exename;
-		finexe >> exename;
-		int Num;
-		finnum >> Num;
-		for (int i = 1; i <= Num; i ++) {
-			string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
-			freopen(s.c_str(), "w", stdout);
-			system(exename.c_str()); 
-			freopen(s.c_str(), "r", stdin);
-			freopen(s2.c_str(), "w", stdout);
-			system("std.exe");
+	create_directories(fn);
+	fout.flush();
+	int subtask=config["enable_subtask"];
+	if (!subtask) {
+		string exename=config["exename"];
+		
+		int amount=config["test_amount"];
+		for (int i = 1; i <= amount; i ++) {
+			generate(fn, i, exename, config["std"]);
 			fout << i << ".out/.in Maked\n";
 		}
-		// sys = "zip -r -q -j " + fn + ".zip " + fn;
-		// system(sys.c_str()); 
 	} else {
-		int numa, numb, cnt = 0;
-		string fname, exename;
-		finname >> fname;
-		string fnnn = fn + "\\config.yml";
-		ofstream off;
-		off.open(fn + "\\config.yml");
-		int T; finnum >> T;
-		int mT = 100 % T;
-		while (finnum >> numa) {
-			finnum >> numb;
-			finexe >> exename;
-//			cout << numb << " " << exename;
-			for (int i = numa; i <= numb; i ++) {
-				string s = fn + "\\" + "in" + to_string(i) + ".in", s2 = fn + "\\" + "out" + to_string(i) + ".out";
-				freopen(s.c_str(), "w", stdout);
-				system(exename.c_str()); 
-				freopen(s.c_str(), "r", stdin);
-				freopen(s2.c_str(), "w", stdout);
-				system("std.exe");
-//				freopen(fnnn.c_str(), "w", stdout);
-				off << "in"<< i << ".in:\n";
-				off << "  subtaskId: " << cnt << "\n";
-				if (cnt >= T - mT) off << "  score: " << 100 / T + 1 << "\n";
+		int cnt = 0;
+		string exename;
+		ofstream off(fn + "\\config.yml");
+		int T=config["test_amount"];
+		int lasttask = 100 % T;
+		json task_config = config["subtasks"];
+		
+		for(int t=0;t<T;t++){
+			int begin = task_config[t]["begin"], end = task_config[t][end];
+			exename = task_config[t]["exename"];
+			for (int i=begin; i <= end; i ++){
+				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
+			    generate(fn, i, exename, config["std"]);
+				if (cnt >= T - lasttask) off << "  score: " << 100 / T + 1 << "\n";
 				else off << "  score: " << 100 / T << "\n";
 				off << "\n";
 				fout << i << ".out/.in Maked\n";
 			}
-			cnt ++;
+			cnt++;
 			
 		}
-		
-		 
 	}
-	sys = "zip -r -q -j " + fn + ".zip " + fn;
-	system(sys.c_str());
-	return 0;
+	//_execute("zip -r -q -j " + fn + ".zip " + fn);
 }
