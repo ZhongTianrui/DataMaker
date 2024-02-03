@@ -5,14 +5,12 @@
 #include<cstdlib>
 #include<random>
 #include "includes/json.hpp"
+#include "includes/zipfile.hpp"
 using namespace std;
 using namespace std::filesystem;
+using namespace miniz_cpp;
 using json = nlohmann::json;
 
-struct js{
-	string Name;
-	int Num;
-};
 random_device rd;
 
 struct random{
@@ -24,7 +22,6 @@ struct random{
         return dis(rdm);
     }
 };
-
 
 string strRand(int length) {			// length: �����ַ����ĳ���	
     string buffer;						// buffer: ���淵��ֵ
@@ -42,6 +39,7 @@ int _execute(string cmd){
     return system(cmd.c_str());
 }
 #ifdef _WIN32
+
 int execute(string name){
     return _execute(name + ".exe");
 }
@@ -50,13 +48,17 @@ int execute(string name){
     return _execute("./"+name);
 }
 #endif
-void generate(string fn, int id, string exename, string std){
+
+
+void generate(string fn, int id, string exename, string std, zip_file& zf){
 	string inp = fn + "/" + "in" + to_string(id) + ".in", out = fn + "/" + "out" + to_string(id) + ".out";
 	freopen(inp.c_str(), "w", stdout);
 	execute(exename); 
 	freopen(inp.c_str(), "r", stdin);
 	freopen(out.c_str(), "w", stdout);
 	execute(std);	
+	    zf.write(inp);
+	    zf.write(out);
 }
 
 vector <int> begin, end;
@@ -76,12 +78,15 @@ int main() {
 	create_directories(fn);
 	fout.flush();
 	int subtask=config["enable_subtask"];
+	zip_file zf;
+	
+	int amount=0;
 	if (!subtask) {
 		string exename=config["exename"];
 		
-		int amount=config["test_amount"];
+		amount=config["test_amount"];
 		for (int i = 1; i <= amount; i ++) {
-			generate(fn, i, exename, config["std"]);
+			generate(fn, i, exename, config["std"], zf);
 			fout << i << ".out/.in Maked\n";
 		}
 	} else {
@@ -97,15 +102,19 @@ int main() {
 			exename = task_config[t]["exename"];
 			for (int i=begin; i <= end; i ++){
 				string s = fn + "/" + "in" + to_string(i) + ".in", s2 = fn + "/" + "out" + to_string(i) + ".out";
-			    generate(fn, i, exename, config["std"]);
+			    generate(fn, i, exename, config["std"], zf);
+				off << "in"<< i << ".in:\n";
 				if (cnt >= T - lasttask) off << "  score: " << 100 / T + 1 << "\n";
 				else off << "  score: " << 100 / T << "\n";
 				off << "\n";
 				fout << i << ".out/.in Maked\n";
 			}
 			cnt++;
-			
 		}
+		
+		zf.write(fn+"\\config.yml");
 	}
+	zf.save(fn+".zip");
+	
 	//_execute("zip -r -q -j " + fn + ".zip " + fn);
 }
