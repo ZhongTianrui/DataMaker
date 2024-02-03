@@ -1,6 +1,6 @@
 {
     "name": "example",
-    "enable_subtask": false,
+    "mode": 0,
     "exename": "makedata",
     "std": "std",
     "test_amount": 10
