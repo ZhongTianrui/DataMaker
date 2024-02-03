@@ -18,7 +18,7 @@
 
 4. 打开 config.json
 
-   在 mode 中选择模式
+   在 mode 中选择模式：模式 0：no subtask，模式 1：subtask 捆绑，模式 2：subtask 不捆绑
 
    在 name 中写入测试组的名称，如果输入 random，程序会随机生成一个十位字符串
    在 std 中写入参考程序的路径
