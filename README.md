@@ -62,10 +62,6 @@ randtree(int n) ：随机树，生成n个点，n-1条边，附带1e9的权值的
 
 randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 n 和 m，自动打印建边的输入，如果想有权值，with_num = 1，否则 with_num = 0
 
-## Linux 端：
-
-~~把 make.exe 替换成 linux_make.exe~~
-
 ## update:
 
 - [ ] 原本的捆绑选线变为模式选项，增加数据分层模式
