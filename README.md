@@ -93,7 +93,7 @@ randgra(int n, int m, bool with_num) ：随机无向联通图，需自行打印 
 
 | date |   summary   |   version   |
 | :--------------: | :---: | :---: |
-| - | 移除随机名称功能，部分重构 make.cpp，移除task_amount参数 | 3.1 |
+| 2024/2/4 | 移除随机名称功能，部分重构 make.cpp，移除task_amount参数 | 3.1 |
 | 2024/2/3 | 原本的捆绑选项变为模式选项，增加数据分层模式，把调用 makedata.cpp 的代码中增加命令行参数传入，更新函数库，重新制作 make.cpp，添加对于 Linux 的支持，支持通过 json 配置。 | 3.0 |
 | 2024/2/2 | 修复捆绑，自动配置 config.yml 文件 | 2.3.2 |
 | 2023/2/8 | 程序会将输出放在 log.log | 2.3.1 |
