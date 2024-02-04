@@ -3,7 +3,6 @@
     "mode": 2,
     "exename": "makedata",
     "std": "std",
-    "task_amount": 3, 
     "subtasks": [
         {
             "begin": 1,
