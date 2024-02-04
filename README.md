@@ -36,17 +36,17 @@
    #include "includes/make.hpp"
    using namespace std;
    int main(int argc, char* argv[]) {
-   	ios::sync_with_stdio(false);
-   	pre();
-   	/*make your data here
-   	use cout in output
-   	*/
-   	if (argv[1][0] == '0') cout << randint(1, 1e4) << " " << randint(1, 1e4);//第一种情况
-   	else if (argv[1][0] == '1') cout << randint(1, 1e7) << " " << randint(1, 1e7);//第二种
-   	else if (argv[1][0] == '2') cout << randint(1, 1e9) << " " << randint(1, 1e9);//第三种
-   	else cout << "err";//如果 config 写的是对的话，这种情况不会发生
+       ios::sync_with_stdio(false);
+       pre();
+       /*make your data here
+       use cout in output
+       */
+   	   if (argv[1][0] == '0') cout << randint(1, 1e4) << " " << randint(1, 1e4);//第一种情况
+   	   else if (argv[1][0] == '1') cout << randint(1, 1e7) << " " << randint(1, 1e7);//第二种
+   	   else if (argv[1][0] == '2') cout << randint(1, 1e9) << " " << randint(1, 1e9);//第三种
+   	   else cout << "err";//如果 config 写的是对的话，这种情况不会发生
        //每一个 subtask 对应一个
-   	return 0;
+       return 0;
    }
    
    ```
